@@ -46,15 +46,11 @@ extension PhotoEditorViewController {
     }
 
     @IBAction func drawButtonTapped(_ sender: Any) {
-        
-        addGestures(view: self.canvasView, isAll: false)
         isDrawing = true
         canvasImageView.isUserInteractionEnabled = false
         doneButton.isHidden = false
         colorPickerView.isHidden = false
         hideToolbar(hide: true)
-        
-
     }
 
     @IBAction func textButtonTapped(_ sender: Any) {
@@ -74,24 +70,17 @@ extension PhotoEditorViewController {
         textView.isScrollEnabled = false
         textView.delegate = self
         self.canvasImageView.addSubview(textView)
-        addGestures(view: textView, isAll: true)
+        addGestures(view: textView)
         textView.becomeFirstResponder()
     }    
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        
-        
         view.endEditing(true)
         doneButton.isHidden = true
         colorPickerView.isHidden = true
         canvasImageView.isUserInteractionEnabled = true
         hideToolbar(hide: false)
         isDrawing = false
-        
-        addGestures(view: self.canvasView, isAll: true)
-
-        
-        
     }
     
     //MARK: Bottom Toolbar

@@ -33,7 +33,6 @@ class CropRectView: UIView, ResizeControlDelegate {
                 let width = bounds.width
                 let height = bounds.height
                 fixedAspectRatio = min(width / height, height / width)
-
             }
         }
     }
@@ -119,7 +118,7 @@ class CropRectView: UIView, ResizeControlDelegate {
             if showsGridMajor {
                 if i > 0 {
                     UIColor.white.set()
-                    UIRectFill(CGRect(x: round(CGFloat(i) * width / 3.0), y: borderPadding, width: 1.0, height: round(height) - borderPadding * 4.0))
+                    UIRectFill(CGRect(x: round(CGFloat(i) * width / 3.0), y: borderPadding, width: 1.0, height: round(height) - borderPadding * 2.0))
                     UIRectFill(CGRect(x: borderPadding, y: round(CGFloat(i) * height / 3.0), width: round(width) - borderPadding * 2.0, height: 1.0))
                 }
             }
@@ -141,7 +140,6 @@ class CropRectView: UIView, ResizeControlDelegate {
     }
     
     func enableResizing(_ enabled: Bool) {
-        
         resizeImageView.isHidden = !enabled
         
         topLeftCornerView.enabled = enabled

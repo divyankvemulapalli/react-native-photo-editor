@@ -17,8 +17,6 @@ public final class PhotoEditorViewController: UIViewController {
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     //To hold the drawings and stickers
     @IBOutlet weak var canvasImageView: UIImageView!
-    
-//    var pinchGesture  = UIPinchGestureRecognizer()
 
     @IBOutlet weak var topToolbar: UIView!
     @IBOutlet weak var bottomToolbar: UIView!
@@ -79,27 +77,46 @@ public final class PhotoEditorViewController: UIViewController {
         registerFont()
         super.loadView()
     }
+    
+    override public func viewWillAppear(_ animated: Bool) {
         
-
+        if #available(iOS 11, *) {
+            let guide = view.safeAreaLayoutGuide
+            self.imageView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
+            self.imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            self.imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            
+            
+            
+        } else {
+            self.imageView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor).isActive = true
+            self.imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            self.imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+          
+        }
+                
+    
+    }
+    
+    override public func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        NSLog("bounds = \(self.view.bounds)")
+    
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
-
-        addGestures(view: self.canvasView, isAll: true)
         self.setImageView(image: image!)
-        
-        
         
         deleteView.layer.cornerRadius = deleteView.bounds.height / 2
         deleteView.layer.borderWidth = 2.0
         deleteView.layer.borderColor = UIColor.white.cgColor
         deleteView.clipsToBounds = true
         
-//        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
-//        edgePan.edges = .bottom
-//        edgePan.delegate = self
-//        self.view.addGestureRecognizer(edgePan)
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
+        edgePan.edges = .bottom
+        edgePan.delegate = self
+        self.view.addGestureRecognizer(edgePan)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow),
                                                name: NSNotification.Name.UIKeyboardDidShow, object: nil)
@@ -146,10 +163,6 @@ public final class PhotoEditorViewController: UIViewController {
         bottomToolbar.isHidden = hide
         bottomGradient.isHidden = hide
     }
-    
-    
-       
-    
 }
 
 extension PhotoEditorViewController: ColorDelegate {

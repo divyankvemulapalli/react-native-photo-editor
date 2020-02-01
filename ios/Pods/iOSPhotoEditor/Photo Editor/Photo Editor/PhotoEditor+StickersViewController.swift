@@ -55,7 +55,7 @@ extension PhotoEditorViewController: StickersViewControllerDelegate {
         view.center = canvasImageView.center
         self.canvasImageView.addSubview(view)
         //Gestures
-        addGestures(view: view, isAll: true)
+        addGestures(view: view)
     }
     
     func didSelectImage(image: UIImage) {
@@ -68,7 +68,7 @@ extension PhotoEditorViewController: StickersViewControllerDelegate {
         
         self.canvasImageView.addSubview(imageView)
         //Gestures
-        addGestures(view: imageView, isAll: true)
+        addGestures(view: imageView)
     }
     
     func stickersViewDidDisappear() {
@@ -76,40 +76,29 @@ extension PhotoEditorViewController: StickersViewControllerDelegate {
         hideToolbar(hide: false)
     }
     
-    func addGestures(view: UIView, isAll: Bool) {
+    func addGestures(view: UIView) {
         //Gestures
+        view.isUserInteractionEnabled = true
         
+        let panGesture = UIPanGestureRecognizer(target: self,
+                                                action: #selector(PhotoEditorViewController.panGesture))
+        panGesture.minimumNumberOfTouches = 1
+        panGesture.maximumNumberOfTouches = 1
+        panGesture.delegate = self
+        view.addGestureRecognizer(panGesture)
         
-        if(isAll)
-        {
-            view.isUserInteractionEnabled = true
-            
-            let panGesture = UIPanGestureRecognizer(target: self,
-                                                           action: #selector(PhotoEditorViewController.panGesture))
-                   panGesture.minimumNumberOfTouches = 1
-                   panGesture.maximumNumberOfTouches = 1
-                   panGesture.delegate = self
-                   view.addGestureRecognizer(panGesture)
-                   
-                   let pinchGesture = UIPinchGestureRecognizer(target: self,
-                                                               action: #selector(PhotoEditorViewController.pinchGesture))
-                   pinchGesture.delegate = self
-                   view.addGestureRecognizer(pinchGesture)
-                   
-//                   let rotationGestureRecognizer = UIRotationGestureRecognizer(target: self,
-//                                                                               action:#selector(PhotoEditorViewController.rotationGesture) )
-//                   rotationGestureRecognizer.delegate = self
-//                   view.addGestureRecognizer(rotationGestureRecognizer)
-//
-//                   let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PhotoEditorViewController.tapGesture))
-//                   view.addGestureRecognizer(tapGesture)
-        }
-        else{
-            
-            view.isUserInteractionEnabled = false
-                        
-        }
+        let pinchGesture = UIPinchGestureRecognizer(target: self,
+                                                    action: #selector(PhotoEditorViewController.pinchGesture))
+        pinchGesture.delegate = self
+        view.addGestureRecognizer(pinchGesture)
         
+        let rotationGestureRecognizer = UIRotationGestureRecognizer(target: self,
+                                                                    action:#selector(PhotoEditorViewController.rotationGesture) )
+        rotationGestureRecognizer.delegate = self
+        view.addGestureRecognizer(rotationGestureRecognizer)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PhotoEditorViewController.tapGesture))
+        view.addGestureRecognizer(tapGesture)
         
     }
 }

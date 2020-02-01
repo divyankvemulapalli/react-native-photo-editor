@@ -17,7 +17,7 @@ protocol ResizeControlDelegate: class {
 class ResizeControl: UIView {
     weak var delegate: ResizeControlDelegate?
     var translation = CGPoint.zero
-    var enabled = false
+    var enabled = true
     fileprivate var startPoint = CGPoint.zero
 
     override init(frame: CGRect) {

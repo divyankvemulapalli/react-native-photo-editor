@@ -18,14 +18,26 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
      Selecting transparent parts of the imageview won't move the object
      */
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
-        
-        let translation = recognizer.translation(in: self.view)
         if let view = recognizer.view {
-          view.center = CGPoint(x:view.center.x + translation.x,
-                                  y:view.center.y + translation.y)
+            if view is UIImageView {
+                //Tap only on visible parts on the image
+                if recognizer.state == .began {
+                    for imageView in subImageViews(view: canvasImageView) {
+                        let location = recognizer.location(in: imageView)
+                        let alpha = imageView.alphaAtPoint(location)
+                        if alpha > 0 {
+                            imageViewToPan = imageView
+                            break
+                        }
+                    }
+                }
+                if imageViewToPan != nil {
+                    moveView(view: imageViewToPan!, recognizer: recognizer)
+                }
+            } else {
+                moveView(view: view, recognizer: recognizer)
+            }
         }
-        recognizer.setTranslation(CGPoint.zero, in: self.view)
-        
     }
     
     /**
