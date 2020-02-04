@@ -5,6 +5,8 @@
     <string name="save">Save</string>
     <string name="clear_all">Clear All</string>
     <string name="camera">Camera</string>
+    <string name="draw">Mark Up</string>
+    <string name="crop">Crop</string>
     <string name="gallery">Gallery</string>
     <string name="upload_dialog_title">Upload Image</string>
     <string name="upload_picker_title">Select Picture</string>

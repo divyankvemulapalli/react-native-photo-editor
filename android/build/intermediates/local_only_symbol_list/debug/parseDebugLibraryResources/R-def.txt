@@ -127,8 +127,10 @@ string choose_from_camera
 string choose_from_gallery
 string clear_all
 string continue_txt
+string crop
 string directory_create_fail
 string done
+string draw
 string erase
 string gallery
 string ic_clear_all
