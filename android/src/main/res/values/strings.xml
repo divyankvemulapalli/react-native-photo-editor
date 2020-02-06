@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">PhotoEditor</string>
+    <string name="app_name">Copart Go</string>
     <string name="title_activity_photo_editor">PhotoEditorActivity</string>
     <string name="done">Done</string>
     <string name="save">Save</string>
     <string name="clear_all">Clear All</string>
     <string name="camera">Camera</string>
-    <string name="draw">Mark Up</string>
+    <string name="draw">Markup</string>
     <string name="crop">Crop</string>
     <string name="gallery">Gallery</string>
     <string name="upload_dialog_title">Upload Image</string>
