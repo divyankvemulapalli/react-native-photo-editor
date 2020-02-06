@@ -1,0 +1,42 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="ui.photoeditor.test" >
+4
+5    <uses-sdk
+5-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:5:5-74
+6        android:minSdkVersion="21"
+6-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:5:15-41
+7        android:targetSdkVersion="28" />
+7-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:5:42-71
+8
+9    <instrumentation
+9-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:11:5-15:69
+10        android:name="android.test.InstrumentationTestRunner"
+10-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:11:22-75
+11        android:functionalTest="false"
+11-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:14:22-52
+12        android:handleProfiling="false"
+12-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:13:22-53
+13        android:label="Tests for ui.photoeditor.test"
+13-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:15:22-67
+14        android:targetPackage="ui.photoeditor.test" />
+14-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:12:22-65
+15
+16    <application
+16-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:7:5-9:19
+17        android:allowBackup="true"
+17-->[com.github.prscX:photo-editor-android:master-SNAPSHOT] /Users/divemulapa/.gradle/caches/transforms-2/files-2.1/fa29aee66b5b21824e3d37a3147b4d21/jetified-photo-editor-android-master-SNAPSHOT/AndroidManifest.xml:12:9-35
+18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+18-->[androidx.core:core:1.0.0] /Users/divemulapa/.gradle/caches/transforms-2/files-2.1/3cd4bf19864fb243c072b37624ac0004/core-1.0.0/AndroidManifest.xml:22:18-86
+19        android:debuggable="true"
+19-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:7:18-43
+20        android:label="@string/app_name"
+20-->[com.github.prscX:photo-editor-android:master-SNAPSHOT] /Users/divemulapa/.gradle/caches/transforms-2/files-2.1/fa29aee66b5b21824e3d37a3147b4d21/jetified-photo-editor-android-master-SNAPSHOT/AndroidManifest.xml:13:9-41
+21        android:supportsRtl="true" >
+21-->[com.github.prscX:photo-editor-android:master-SNAPSHOT] /Users/divemulapa/.gradle/caches/transforms-2/files-2.1/fa29aee66b5b21824e3d37a3147b4d21/jetified-photo-editor-android-master-SNAPSHOT/AndroidManifest.xml:14:9-35
+22        <uses-library android:name="android.test.runner" />
+22-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:8:9-60
+22-->/Users/divemulapa/IdeaProjects/Copart/copart_go/node_modules/react-native-photo-editor/android/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6892530991751383353.xml:8:23-57
+23    </application>
+24
+25</manifest>
