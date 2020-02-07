@@ -22,33 +22,45 @@
             android:background="#000000"
             android:gravity="center">
 
-            <RelativeLayout
-                android:id="@+id/parent_image_rl"
+
+            <com.ahmedadeltito.photoeditor.widget.ZoomableRelativeLayout
+                android:id="@+id/super_image_rl"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
+                android:background="#123456"
+                >
+
+
+            <RelativeLayout
+                android:id="@+id/parent_image_rl"
+                android:layout_width="1280px"
+                android:layout_height="960px"
+                android:layout_centerInParent="true"
+                android:background="#235424"
                 >
 
                 <ImageView
                     android:id="@+id/photo_edit_iv"
-                    android:layout_width="1280px"
-                    android:layout_height="960px"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="fitCenter"
+                    android:background="#555555"
                     />
 
                 <com.ahmedadeltito.photoeditorsdk.BrushDrawingView
                     android:id="@+id/drawing_view"
-                    android:layout_width="1280px"
-                    android:layout_height="960px"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_alignBottom="@+id/photo_edit_iv"
                     android:layout_alignTop="@+id/photo_edit_iv"
                     android:layout_centerInParent="true"
-                    android:scaleType="fitCenter"
                     android:visibility="gone" />
 
             </RelativeLayout>
+
+        </com.ahmedadeltito.photoeditor.widget.ZoomableRelativeLayout>
 
             <TextView
                 android:id="@+id/done_drawing_tv"

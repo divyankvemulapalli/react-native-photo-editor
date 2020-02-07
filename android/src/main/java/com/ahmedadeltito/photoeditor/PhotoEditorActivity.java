@@ -36,6 +36,8 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -49,6 +51,7 @@ import android.widget.Toast;
 import android.view.WindowManager;
 
 import com.ahmedadeltito.photoeditor.widget.SlidingUpPanelLayout;
+import com.ahmedadeltito.photoeditor.widget.ZoomableRelativeLayout;
 import com.ahmedadeltito.photoeditorsdk.BrushDrawingView;
 import com.ahmedadeltito.photoeditorsdk.OnPhotoEditorSDKListener;
 import com.ahmedadeltito.photoeditorsdk.PhotoEditorSDK;
@@ -80,6 +83,7 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
     final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
     private final String TAG = "PhotoEditorActivity";
+    private ZoomableRelativeLayout SuperImageRelativeLayout;
     private RelativeLayout parentImageRelativeLayout;
     private RecyclerView drawingViewColorPickerRecyclerView;
     private TextView undoTextView, undoTextTextView, doneDrawingTextView, eraseDrawingTextView;
@@ -101,6 +105,32 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
     private boolean hideBottomControls = true;
 
     private ImageView photoEditImageView;
+
+    private class OnPinchListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+
+        float startingSpan;
+        float endSpan;
+        float startFocusX;
+        float startFocusY;
+
+
+        public boolean onScaleBegin(ScaleGestureDetector detector) {
+            startingSpan = detector.getCurrentSpan();
+            startFocusX = detector.getFocusX();
+            startFocusY = detector.getFocusY();
+            return true;
+        }
+
+
+        public boolean onScale(ScaleGestureDetector detector) {
+            SuperImageRelativeLayout.scale(detector.getCurrentSpan()/startingSpan, startFocusX, startFocusY);
+            return true;
+        }
+
+        public void onScaleEnd(ScaleGestureDetector detector) {
+//            parentImageRelativeLayout.restore();
+        }
+    }
 
 
     @Override
@@ -140,6 +170,7 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
         BrushDrawingView brushDrawingView = (BrushDrawingView) findViewById(R.id.drawing_view);
         drawingViewColorPickerRecyclerView = (RecyclerView) findViewById(R.id.drawing_view_color_picker_recycler_view);
         parentImageRelativeLayout = (RelativeLayout) findViewById(R.id.parent_image_rl);
+        SuperImageRelativeLayout = (ZoomableRelativeLayout) findViewById(R.id.super_image_rl);
         TextView closeTextView = (TextView) findViewById(R.id.close_tv);
         TextView addTextView = (TextView) findViewById(R.id.add_text_tv);
         TextView addPencil = (TextView) findViewById(R.id.add_pencil_tv);
@@ -168,6 +199,18 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
 
         photoEditImageView.setImageBitmap(rotatedBitmap);
 
+
+        final ScaleGestureDetector scaleGestureDetector = new ScaleGestureDetector(this, new OnPinchListener());
+
+        SuperImageRelativeLayout.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                scaleGestureDetector.onTouchEvent(event);
+                return true;
+            }
+        });
 
 
         closeTextView.setTypeface(newFont);

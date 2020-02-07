@@ -105,6 +105,7 @@ id photo_edit_iv
 id save_text_tv
 id save_tv
 id sliding_layout
+id super_image_rl
 id top_parent_rl
 id top_shadow
 id undo_text_tv
