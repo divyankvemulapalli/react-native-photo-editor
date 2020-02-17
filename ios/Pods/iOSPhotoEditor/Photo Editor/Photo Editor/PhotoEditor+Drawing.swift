@@ -12,6 +12,20 @@ extension PhotoEditorViewController {
     
     override public func touchesBegan(_ touches: Set<UITouch>,
                                       with event: UIEvent?){
+        
+        if canvasImageView.image === nil {
+            
+            let size = image?.suitableSize(widthLimit: UIScreen.main.bounds.width)
+            canvasImageView.frame = CGRect(x: 0, y: 0, width: imageView.frame.width, height: (size?.height)!)
+            
+            let canvasSize = canvasImageView.frame.integral.size
+            UIGraphicsBeginImageContextWithOptions(canvasSize, false, 0)
+            UIGraphicsGetCurrentContext()
+            canvasImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+                            
+        }
+        
         if isDrawing {
             swiped = false
             if let touch = touches.first {
@@ -58,6 +72,9 @@ extension PhotoEditorViewController {
     
     func drawLineFrom(_ fromPoint: CGPoint, toPoint: CGPoint) {
         // 1
+        let size = image?.suitableSize(widthLimit: UIScreen.main.bounds.width)
+        canvasImageView.frame = CGRect(x: 0, y: 0, width: imageView.frame.width, height: (size?.height)!)
+        
         let canvasSize = canvasImageView.frame.integral.size
         UIGraphicsBeginImageContextWithOptions(canvasSize, false, 0)
         if let context = UIGraphicsGetCurrentContext() {

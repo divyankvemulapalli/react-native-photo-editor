@@ -34,29 +34,20 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
      */
     @objc func pinchGesture(_ recognizer: UIPinchGestureRecognizer) {
         if let view = recognizer.view {
-            if view is UITextView {
-                let textView = view as! UITextView
-                
-                if textView.font!.pointSize * recognizer.scale < 90 {
-                    let font = UIFont(name: textView.font!.fontName, size: textView.font!.pointSize * recognizer.scale)
-                    textView.font = font
-                    let sizeToFit = textView.sizeThatFits(CGSize(width: UIScreen.main.bounds.size.width,
-                                                                 height:CGFloat.greatestFiniteMagnitude))
-                    textView.bounds.size = CGSize(width: textView.intrinsicContentSize.width,
-                                                  height: sizeToFit.height)
-                } else {
-                    let sizeToFit = textView.sizeThatFits(CGSize(width: UIScreen.main.bounds.size.width,
-                                                                 height:CGFloat.greatestFiniteMagnitude))
-                    textView.bounds.size = CGSize(width: textView.intrinsicContentSize.width,
-                                                  height: sizeToFit.height)
+            
+            if recognizer.state == .began || recognizer.state == .changed
+            {
+                if (cumulativeScale < maxScale && recognizer.scale > 1.0) {
+                    view.transform = view.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
+                    cumulativeScale *= recognizer.scale
+                    recognizer.scale = 1.0
                 }
-                
-                
-                textView.setNeedsDisplay()
-            } else {
-                view.transform = view.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
+                if (cumulativeScale > minScale && recognizer.scale < 1.0) {
+                    view.transform = view.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
+                    cumulativeScale *= recognizer.scale
+                    recognizer.scale = 1.0
+                }
             }
-            recognizer.scale = 1
         }
     }
     
@@ -77,19 +68,11 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
      */
     @objc func tapGesture(_ recognizer: UITapGestureRecognizer) {
         if let view = recognizer.view {
-            if view is UIImageView {
-                //Tap only on visible parts on the image
-                for imageView in subImageViews(view: canvasImageView) {
-                    let location = recognizer.location(in: imageView)
-                    let alpha = imageView.alphaAtPoint(location)
-                    if alpha > 0 {
-                        scaleEffect(view: imageView)
-                        break
-                    }
-                }
-            } else {
-                scaleEffect(view: view)
-            }
+              
+            view.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+            view.center = super.view.center
+            cumulativeScale = 1
+           
         }
     }
     
@@ -121,28 +104,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
         return true
     }
     
-    /**
-     Scale Effect
-     */
-    func scaleEffect(view: UIView) {
-        view.superview?.bringSubview(toFront: view)
-        
-        if #available(iOS 10.0, *) {
-            let generator = UIImpactFeedbackGenerator(style: .heavy)
-            generator.impactOccurred()
-        }
-        let previouTransform =  view.transform
-        UIView.animate(withDuration: 0.2,
-                       animations: {
-                        view.transform = view.transform.scaledBy(x: 1.2, y: 1.2)
-        },
-                       completion: { _ in
-                        UIView.animate(withDuration: 0.2) {
-                            view.transform  = previouTransform
-                        }
-        })
-    }
-    
+   
     /**
      Moving Objects 
      delete the view if it's inside the delete view

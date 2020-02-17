@@ -71,6 +71,10 @@ public final class PhotoEditorViewController: UIViewController {
     var imageViewToPan: UIImageView?
     var isTyping: Bool = false
     
+    var cumulativeScale:CGFloat = 1.0
+    let maxScale:CGFloat = 4
+    let minScale:CGFloat = 0.75
+    
     
     var stickersViewController: StickersViewController!
 
@@ -138,6 +142,7 @@ public final class PhotoEditorViewController: UIViewController {
         imageView.image = image
         let size = image.suitableSize(widthLimit: UIScreen.main.bounds.width)
         imageViewHeightConstraint.constant = (size?.height)!
+
     }
     
     func hideToolbar(hide: Bool) {

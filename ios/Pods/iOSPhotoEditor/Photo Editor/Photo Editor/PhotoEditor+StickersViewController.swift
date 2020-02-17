@@ -100,6 +100,10 @@ extension PhotoEditorViewController: StickersViewControllerDelegate {
 //                                                                               action:#selector(PhotoEditorViewController.rotationGesture) )
 //                   rotationGestureRecognizer.delegate = self
 //                   view.addGestureRecognizer(rotationGestureRecognizer)
+            
+                   let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PhotoEditorViewController.tapGesture))
+                   tapGesture.numberOfTapsRequired = 2
+                   view.addGestureRecognizer(tapGesture)
 //
 //                   let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PhotoEditorViewController.tapGesture))
 //                   view.addGestureRecognizer(tapGesture)
